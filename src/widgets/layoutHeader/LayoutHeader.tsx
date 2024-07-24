@@ -1,7 +1,7 @@
-import logo from '../../assets/7.jpeg'
-import SettingsIcon from '@mui/icons-material/Settings'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import SearchIcon from '@mui/icons-material/Search'
+import SettingsIcon from '@mui/icons-material/Settings'
+import logo from '../../assets/7.jpeg'
 
 const LayoutHeader = () => {
     return (

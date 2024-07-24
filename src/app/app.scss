@@ -32,6 +32,79 @@ body .btn {
   margin-bottom: 25px;
 }
 
+.header-inner,
+.header-account-info,
+.header-settings {
+  display: flex;
+  align-items: center;
+}
+
+.header-inner {
+  justify-content: space-between;
+}
+
+.header-account-info {
+  gap: 25px;
+
+}
+
+.date {
+
+  span {
+    margin-right: 25px;
+    font-size: 13px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.header-settings {
+  gap: 25px;
+
+  svg {
+    cursor: pointer;
+    color: #6a6f8d;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}
+
+.account-logo {
+
+  img {
+    border-radius: 50%;
+
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.search {
+  position: relative;
+
+  input[type="text"] {
+    width: 100%;
+    min-width: 520px;
+    border: none;
+    background-color: #f5f6f8;
+    border-radius: 7px;
+    height: 35px;
+    padding-left: 40px;
+    padding-right: 15px;
+    font-size: 13px;
+  }
+
+  .s-icon {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+  }
+}
+
 // CONTENT
 .main-content {
   background-color: #fff;

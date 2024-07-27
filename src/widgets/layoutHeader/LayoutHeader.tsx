@@ -1,18 +1,13 @@
 import NotificationsIcon from '@mui/icons-material/Notifications'
-import SearchIcon from '@mui/icons-material/Search'
 import SettingsIcon from '@mui/icons-material/Settings'
 import logo from '../../assets/7.jpeg'
+import Search from '../../features/search/Search'
 
 const LayoutHeader = () => {
     return (
         <header className={'header-main'}>
             <div className="header-inner">
-                <div className={'search'}>
-                    <div className="s-icon">
-                        <SearchIcon />
-                    </div>
-                    <input type="text" placeholder={'Search for note...'} />
-                </div>
+                <Search placeholder={'Search for note...'} />
                 <div className="header-account-info">
                     <div className="date">
                         <span>15:15</span>

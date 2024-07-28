@@ -103,6 +103,7 @@ body .btn {
 
 // CONTENT
 .main-content {
+    position: relative;
     background-color: #fff;
     min-height: 95vh;
 
@@ -232,6 +233,10 @@ body .btn {
 }
 
 // GRID OF ITEMS
+.notes-grid {
+    // margin-right: 40px;
+}
+
 .note-grid-item {
     background-color: #b0e5fc;
 }
@@ -252,9 +257,11 @@ body .btn {
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
 
+    // gap: 20px;
+
     img,
     .note-grid-item {
-        width: 33.3%;
+        // width: 33.3%;
 
         img {
             width: 100%;
@@ -267,4 +274,65 @@ body .btn {
     -webkit-flex: 1 0 auto;
     -ms-flex: 1 0 auto;
     flex: 1 0 auto;
+}
+
+// POPUP
+.add-note-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-35%, -50%);
+    z-index: 12;
+    padding: 20px;
+
+    border-radius: 10px;
+    height: 500px;
+    width: 550px;
+    background-color: #fff;
+}
+
+.popup-bg {
+    position: absolute;
+    z-index: 10;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgb(51 51 51 / 87%);
+    border-radius: 20px;
+}
+
+.popup-inner {
+    height: 100%;
+
+    form {
+        justify-content: space-between;
+        height: 100%;
+
+        .title-note-input {
+            margin-bottom: 20px;
+        }
+
+        label {
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        input,
+        select {
+            background-color: #f5f6f8;
+            outline: none;
+            border: none;
+            height: 50px;
+            border-radius: 10px;
+            padding: 0 15px;
+        }
+    }
+
+    form,
+    .form-inner {
+        display: flex;
+        flex-direction: column;
+    }
 }

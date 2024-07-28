@@ -1,5 +1,5 @@
 type Props = {
-    img: string
+    img?: string
 }
 
 const NoteItem = ({ img }: Props) => {

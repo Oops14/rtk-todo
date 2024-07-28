@@ -4,9 +4,7 @@ const slice = createSlice({
     name: 'notes',
     initialState: {},
     reducers: {},
-    extraReducers: () => {
-
-    }
+    extraReducers: () => {},
 })
 
 export const noteSlice = slice.reducer

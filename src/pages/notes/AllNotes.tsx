@@ -1,16 +1,29 @@
 import GridViewIcon from '@mui/icons-material/GridView'
 import ViewListIcon from '@mui/icons-material/ViewList'
+import { useState } from 'react'
+import { AddNotePopup } from '../../features/popup/AddNotePopup.tsx'
 import Search from '../../features/search/Search.tsx'
 import LayoutHeader from '../../widgets/layoutHeader/LayoutHeader.tsx'
 import MasonryGrid from './masonryGrid/MasonryGrid.tsx'
 
 const AllNotes = () => {
+    const [isOpen, setIsOpen] = useState(false)
+
+    const showPopup = () => {
+        setIsOpen(true)
+    }
+
     return (
         <div className={'main-content'}>
+            {isOpen && <AddNotePopup setIsOpen={setIsOpen} />}
+
             <LayoutHeader />
             <div className={'content-block-title'}>
                 <h3 className={'content-title'}>Notes</h3>
-                <button className={'btn btn-add'}> + New Note</button>
+                <button onClick={showPopup} className={'btn btn-add'}>
+                    {' '}
+                    + New Note
+                </button>
             </div>
 
             <div className="search-filter-block">
@@ -32,9 +45,7 @@ const AllNotes = () => {
                 </div>
             </div>
 
-            <div className="notes-grid">
-                <MasonryGrid />
-            </div>
+            <MasonryGrid />
         </div>
     )
 }

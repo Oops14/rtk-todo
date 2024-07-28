@@ -3,30 +3,32 @@ import NotificationsIcon from '@mui/icons-material/Notifications'
 import PermMediaIcon from '@mui/icons-material/PermMedia'
 import Masonry from '@mui/lab/Masonry'
 import Box from '@mui/material/Box'
-import Paper from '@mui/material/Paper'
-import { styled } from '@mui/material/styles'
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { AppRootStateType } from '../../../app/store'
-import { Notes } from '../../../entities/noteItem/model/noteSlice'
+import { AppRootStateType } from '../../app/store'
+import { Notes } from '../../entities/noteItem/model/noteSlice'
 
-const Label = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(0.5),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 0,
-}))
-
+/**
+ * 
+ // TODO: MOVE STYLES FROM HTML TO SCSS.
+ // TODO: ADD ACTIVE BOTTOM BUTTON STYLE.
+ */
 export default function MasonryGrid() {
     const notes = useSelector<AppRootStateType, Notes[]>((state) => state.notes)
+
+    const [activeItemId, setActiveItemId] = useState<string | null>(null)
+
+    console.log(notes)
+
+    const addTaskInput = (noteId: string) => {
+        setActiveItemId(noteId)
+    }
 
     return (
         <Box sx={{ width: '100%', minHeight: 829 }}>
             <Masonry columns={4} spacing={2}>
-                {notes.map((item, index) => (
-                    <div key={index} className="masonry-grid-item">
+                {notes.map((item) => (
+                    <div key={item.id} className="masonry-grid-item">
                         {/* <Label>{index + 1}</Label> */}
 
                         <div className="top-note">
@@ -45,9 +47,21 @@ export default function MasonryGrid() {
                         </div>
                         <div className="bottom-note">
                             <h3>{item.title}</h3>
-                            <a href="#" className="btn add-task-button">
-                                Task
-                            </a>
+                            {item.id === activeItemId ? (
+                                <div className="add-task-input">
+                                    <input type="text" />
+                                    <a href="javascript:void(0)" className="btn add-task-button">
+                                        Add
+                                    </a>
+                                </div>
+                            ) : (
+                                <a
+                                    onClick={() => addTaskInput(item.id)}
+                                    href="javascript:void(0)"
+                                    className="btn add-task-button">
+                                    {item.task ? 'Task' : 'Reminder'}
+                                </a>
+                            )}
                         </div>
 
                         <div className="bottom-buttons">

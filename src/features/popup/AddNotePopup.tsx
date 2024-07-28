@@ -1,14 +1,24 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import { useAppDispatch } from '../../app/store'
-import { addNewNoteAction } from '../../entities/noteItem/model/noteSlice'
+import { addNote } from '../../entities/noteItem/model/noteSlice'
 
 type Props = {
     setIsOpen: (isOpen: boolean) => void
 }
 
+/**
+ * 
+ // TODO: REMOVE HARDCODED VALUE FOR IMG.
+ */
 export const AddNotePopup = ({ setIsOpen }: Props) => {
     const dispatch = useAppDispatch()
     const titleInputRef = useRef<HTMLInputElement>(null)
+    const [noteType, setNoteType] = useState('task')
+
+    const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setNoteType(event.target.value)
+    }
 
     const addNewNote = () => {
         if (titleInputRef.current) {
@@ -16,9 +26,12 @@ export const AddNotePopup = ({ setIsOpen }: Props) => {
             console.log('Note Title:', title)
 
             dispatch(
-                addNewNoteAction({
+                addNote({
+                    id: uuidv4(),
                     title: title,
                     img: 'https://images.unsplash.com/photo-1529655683826-aba9b3e77383?w=162&auto=format',
+                    reminder: noteType === 'reminder' ? true : false,
+                    task: noteType === 'task' ? true : false,
                 })
             )
         }
@@ -36,9 +49,9 @@ export const AddNotePopup = ({ setIsOpen }: Props) => {
                             <label>Set the title for your Note</label>
                             <input type="text" className="title-note-input" ref={titleInputRef} />
                             <label>Is this note for task or reminder?</label>
-                            <select>
-                                <option value="tas">Task</option>
-                                <option value="rem">Reminder</option>
+                            <select value={noteType} onChange={handleChange}>
+                                <option value="task">Task</option>
+                                <option value="reminder">Reminder</option>
                             </select>
                         </div>
 

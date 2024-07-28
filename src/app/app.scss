@@ -291,6 +291,17 @@ body .btn {
     padding: 0 11px;
 }
 
+.add-task-input {
+    display: flex;
+    align-items: center;
+
+    input {
+        max-width: 150px;
+        margin-right: 5px;
+        border-radius: 5px;
+    }
+}
+
 // POPUP
 .add-note-popup {
     position: fixed;

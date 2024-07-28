@@ -3,9 +3,11 @@ import { useDispatch } from 'react-redux'
 import { AnyAction, combineReducers } from 'redux'
 import { ThunkAction, ThunkDispatch } from 'redux-thunk'
 import { noteSlice } from '../entities/noteItem/model/noteSlice.ts'
+import { tasksSlice } from '../entities/tasks/model/tasksSlice.ts'
 
 const rootReducer = combineReducers({
     notes: noteSlice,
+    tasks: tasksSlice,
 })
 
 export const store = configureStore({ reducer: rootReducer })

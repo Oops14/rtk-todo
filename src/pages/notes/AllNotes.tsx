@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { AddNotePopup } from '../../features/popup/AddNotePopup.tsx'
 import Search from '../../features/search/Search.tsx'
 import LayoutHeader from '../../widgets/layoutHeader/LayoutHeader.tsx'
-import MasonryGrid from './masonryGrid/MasonryGrid.tsx'
+import MasonryGrid from '../../widgets/masonryGrid/MasonryGrid.tsx'
 
 const AllNotes = () => {
     const [isOpen, setIsOpen] = useState(false)

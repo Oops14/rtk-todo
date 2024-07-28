@@ -1,6 +1,6 @@
-import { AnyAction, combineReducers } from 'redux'
-import { useDispatch } from 'react-redux'
 import { configureStore, UnknownAction } from '@reduxjs/toolkit'
+import { useDispatch } from 'react-redux'
+import { AnyAction, combineReducers } from 'redux'
 import { ThunkAction, ThunkDispatch } from 'redux-thunk'
 import { noteSlice } from '../entities/noteItem/model/noteSlice.ts'
 

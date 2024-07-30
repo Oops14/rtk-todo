@@ -30,8 +30,8 @@ export const AddNotePopup = ({ setIsOpen }: Props) => {
                     id: uuidv4(),
                     title: title,
                     img: 'https://images.unsplash.com/photo-1529655683826-aba9b3e77383?w=162&auto=format',
-                    reminder: noteType === 'reminder' ? true : false,
-                    task: noteType === 'task' ? true : false,
+                    isReminder: noteType === 'reminder' ? true : false,
+                    isTask: noteType === 'task' ? true : false,
                 })
             )
         }

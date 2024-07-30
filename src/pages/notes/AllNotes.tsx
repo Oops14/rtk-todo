@@ -1,6 +1,7 @@
 import GridViewIcon from '@mui/icons-material/GridView'
 import ViewListIcon from '@mui/icons-material/ViewList'
 import { useState } from 'react'
+import { useAppDispatch } from '../../app/store.ts'
 import { AddNotePopup } from '../../features/popup/AddNotePopup.tsx'
 import Search from '../../features/search/Search.tsx'
 import LayoutHeader from '../../widgets/layoutHeader/LayoutHeader.tsx'
@@ -8,10 +9,15 @@ import MasonryGrid from '../../widgets/masonryGrid/MasonryGrid.tsx'
 
 const AllNotes = () => {
     const [isOpen, setIsOpen] = useState(false)
+    const dispatch = useAppDispatch()
 
     const showPopup = () => {
         setIsOpen(true)
     }
+
+    // useEffect(() => {
+    //     dispatch(getTasks([]))
+    // }, [])
 
     return (
         <div className={'main-content'}>

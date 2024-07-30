@@ -5,8 +5,9 @@ import Masonry from '@mui/lab/Masonry'
 import Box from '@mui/material/Box'
 import { useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { AppRootStateType } from '../../app/store'
+import { AppRootStateType, useAppDispatch } from '../../app/store'
 import { Notes } from '../../entities/noteItem/model/noteSlice'
+import { addTask, NoteTasks } from '../../entities/tasks/model/tasksSlice'
 
 /**
  * 
@@ -14,7 +15,11 @@ import { Notes } from '../../entities/noteItem/model/noteSlice'
  // TODO: ADD ACTIVE BOTTOM BUTTON STYLE.
  */
 export default function MasonryGrid() {
+    const dispatch = useAppDispatch()
     const notes = useSelector<AppRootStateType, Notes[]>((state) => state.notes)
+    const tasks = useSelector<AppRootStateType, NoteTasks>((state) => state.tasks)
+
+    console.log(tasks)
     console.log(notes)
 
     const [activeItemId, setActiveItemId] = useState<string | null>(null)
@@ -26,11 +31,17 @@ export default function MasonryGrid() {
         setActiveItemId(noteId)
     }
 
-    const handleTask = (taskId: string, e: React.MouseEvent<HTMLAnchorElement>) => {
+    const handleTask = (noteId: string, e: React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault()
 
         if (taskRef.current) {
             console.log('Task:', taskRef.current.value)
+            let task = {
+                id: '1',
+                title: taskRef.current.value,
+                isDone: false,
+            }
+            dispatch(addTask({ noteId: noteId, task: task }))
         }
 
         setActiveItemId(null)

@@ -7,10 +7,11 @@ import { useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { AppRootStateType, useAppDispatch } from '../../app/store'
 import { Notes } from '../../entities/noteItem/model/noteSlice'
-import { addTask, NoteTasks } from '../../entities/tasks/model/tasksSlice'
+import { addTask, NoteTasks, Task } from '../../entities/tasks/model/tasksSlice'
+import { TaskItem } from '../../entities/tasks/ui/Task.tsx'
 
 /**
- * 
+ *
  // TODO: MOVE STYLES FROM HTML TO SCSS.
  // TODO: ADD ACTIVE BOTTOM BUTTON STYLE.
  */
@@ -36,11 +37,12 @@ export default function MasonryGrid() {
 
         if (taskRef.current) {
             console.log('Task:', taskRef.current.value)
-            let task = {
+            const task = {
                 id: '1',
                 title: taskRef.current.value,
                 isDone: false,
             }
+
             dispatch(addTask({ noteId: noteId, task: task }))
         }
 
@@ -80,6 +82,10 @@ export default function MasonryGrid() {
                                     {item.isTask ? 'Task' : 'Reminder'}
                                 </a>
                             )}
+
+                            <div className="tasks">
+                                {tasks[item.id]?.map((task: Task) => <TaskItem title={task.title} />)}
+                            </div>
                         </div>
 
                         <div className="bottom-buttons">

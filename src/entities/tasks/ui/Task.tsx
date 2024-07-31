@@ -1,9 +1,15 @@
-const Task = () => {
+type Props = {
+    title: string
+}
+
+export const TaskItem = ({ title }: Props) => {
     return (
-        <div>
-            <div></div>
+        <div className="task-item">
+            <input type="checkbox" />
+            <h5>{title}</h5>
+            <a href="#" className="btn">
+                X
+            </a>
         </div>
     )
 }
-
-export default Task

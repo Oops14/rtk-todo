@@ -5,6 +5,7 @@ import Masonry from '@mui/lab/Masonry'
 import Box from '@mui/material/Box'
 import { useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { v4 as uuidv4 } from 'uuid'
 import { AppRootStateType, useAppDispatch } from '../../app/store'
 import { Notes } from '../../entities/noteItem/model/noteSlice'
 import { addTask, NoteTasks, Task } from '../../entities/tasks/model/tasksSlice'
@@ -16,9 +17,12 @@ import { TaskItem } from '../../entities/tasks/ui/Task.tsx'
  // TODO: ADD ACTIVE BOTTOM BUTTON STYLE.
  */
 export default function MasonryGrid() {
-    const dispatch = useAppDispatch()
     const notes = useSelector<AppRootStateType, Notes[]>((state) => state.notes)
     const tasks = useSelector<AppRootStateType, NoteTasks>((state) => state.tasks)
+
+    const dispatch = useAppDispatch()
+
+    const [isDone, setIsDone] = useState(false)
 
     console.log(tasks)
     console.log(notes)
@@ -38,7 +42,7 @@ export default function MasonryGrid() {
         if (taskRef.current) {
             console.log('Task:', taskRef.current.value)
             const task = {
-                id: '1',
+                id: uuidv4(),
                 title: taskRef.current.value,
                 isDone: false,
             }
@@ -47,6 +51,11 @@ export default function MasonryGrid() {
         }
 
         setActiveItemId(null)
+    }
+
+    const handleCheckbox = (taskId: string, noteId: string) => {
+        console.log(taskId)
+        console.log(noteId)
     }
 
     return (
@@ -84,7 +93,16 @@ export default function MasonryGrid() {
                             )}
 
                             <div className="tasks">
-                                {tasks[item.id]?.map((task: Task) => <TaskItem title={task.title} />)}
+                                {tasks[item.id]?.map((task: Task) => (
+                                    <TaskItem
+                                        key={task.id}
+                                        taskId={task.id}
+                                        noteId={item.id}
+                                        title={task.title}
+                                        isDone={task.isDone}
+                                        handleCheckbox={handleCheckbox}
+                                    />
+                                ))}
                             </div>
                         </div>
 

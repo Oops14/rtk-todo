@@ -76,7 +76,6 @@ const slice = createSlice({
         addNote: (state, action: PayloadAction<Notes>) => {
             state.push(action.payload)
         },
-        // addisTaskToNoteAction: (state, action: PayloadAction<Notes>) => {},
     },
     extraReducers: () => {},
 })

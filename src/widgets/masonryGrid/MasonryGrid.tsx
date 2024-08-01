@@ -53,11 +53,6 @@ export default function MasonryGrid() {
         setActiveItemId(null)
     }
 
-    const handleCheckbox = (taskId: string, noteId: string) => {
-        console.log(taskId)
-        console.log(noteId)
-    }
-
     return (
         <Box sx={{ width: '100%', minHeight: 829 }}>
             <Masonry columns={4} spacing={2}>
@@ -100,7 +95,6 @@ export default function MasonryGrid() {
                                         noteId={item.id}
                                         title={task.title}
                                         isDone={task.isDone}
-                                        handleCheckbox={handleCheckbox}
                                     />
                                 ))}
                             </div>

@@ -31,9 +31,14 @@ const slice = createSlice({
             const indexOfTask = note.findIndex((t) => t.id === action.payload.taskId)
             if (indexOfTask !== -1) note.splice(indexOfTask, 1)
         },
+        toggleTaskCompletion: (state, action: PayloadAction<{ taskId: string; noteId: string }>) => {
+            let note = state[action.payload.noteId]
+            const indexOfTask = note.findIndex((t) => t.id === action.payload.taskId)
+            if (indexOfTask !== -1) note[indexOfTask].isDone = !note[indexOfTask].isDone
+        },
     },
     extraReducers: () => {},
 })
 
 export const tasksSlice = slice.reducer
-export const { addTask, removeTask: deleteTask } = slice.actions
+export const { addTask, removeTask: deleteTask, toggleTaskCompletion } = slice.actions

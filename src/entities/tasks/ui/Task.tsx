@@ -1,26 +1,28 @@
 import { useAppDispatch } from '../../../app/store'
-import { deleteTask } from '../model/tasksSlice'
+import { deleteTask, toggleTaskCompletion } from '../model/tasksSlice'
 
 type Props = {
     taskId: string
     noteId: string
     title: string
     isDone: boolean
-    handleCheckbox: (taskId: string, noteId: string) => void
 }
 
-export const TaskItem = ({ taskId, title, isDone, handleCheckbox, noteId }: Props) => {
+export const TaskItem = ({ taskId, title, isDone, noteId }: Props) => {
     const dispatch = useAppDispatch()
+
+    const handleCheckbox = (taskId: string, noteId: string) => {
+        dispatch(toggleTaskCompletion({ taskId, noteId }))
+    }
 
     const removeTask = (e: React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault()
-
-        dispatch(deleteTask({ taskId: taskId, noteId: noteId }))
+        dispatch(deleteTask({ taskId, noteId }))
     }
 
     return (
-        <div className="task-item">
-            <input onChange={() => handleCheckbox(taskId, noteId)} disabled={isDone} type="checkbox" />
+        <div className={isDone ? 'task-item is-checked' : 'task-item'}>
+            <input onChange={() => handleCheckbox(taskId, noteId)} checked={isDone} type="checkbox" />
             <h5>{title}</h5>
             <a href="#" className="btn" onClick={(e) => removeTask(e)}>
                 X

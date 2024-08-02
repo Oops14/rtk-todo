@@ -22,8 +22,6 @@ export default function MasonryGrid() {
 
     const dispatch = useAppDispatch()
 
-    const [isDone, setIsDone] = useState(false)
-
     console.log(tasks)
     console.log(notes)
 
@@ -40,7 +38,6 @@ export default function MasonryGrid() {
         e.preventDefault()
 
         if (taskRef.current) {
-            console.log('Task:', taskRef.current.value)
             const task = {
                 id: uuidv4(),
                 title: taskRef.current.value,

@@ -8,7 +8,6 @@ import MasonryGrid from '../../widgets/masonryGrid/MasonryGrid.tsx'
 
 const AllNotes = () => {
     const [isOpen, setIsOpen] = useState(false)
-    // const dispatch = useAppDispatch()
 
     const showPopup = () => {
         setIsOpen(true)

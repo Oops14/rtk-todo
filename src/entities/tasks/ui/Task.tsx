@@ -27,7 +27,7 @@ export const TaskItem = ({ taskId, title, isDone, noteId }: Props) => {
     const updateCurrentTask = () => {
         setIsEdited(false)
 
-        if (inputRef.current) {
+        if (inputRef.current && inputRef.current.value.length) {
             const text = inputRef.current.value
             dispatch(updateTask({ taskId, noteId, newTitle: text }))
         }
@@ -35,7 +35,7 @@ export const TaskItem = ({ taskId, title, isDone, noteId }: Props) => {
 
     return isEdited ? (
         <>
-            <input type="text" ref={inputRef} />
+            <input placeholder={title} type="text" ref={inputRef} />
             <button onClick={() => updateCurrentTask()} className={'btn'}>
                 Update
             </button>

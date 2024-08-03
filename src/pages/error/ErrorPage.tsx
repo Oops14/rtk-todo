@@ -1,8 +1,13 @@
+import img404 from '../../assets/404.jpg'
+
 const ErrorPage = () => {
     return (
-        <div>
-            <div>404</div>
-        </div>
+        <>
+            <button className={'btn'}>Back to Home page</button>
+            <div className={'error-page'}>
+                <img src={img404} alt="404" />
+            </div>
+        </>
     )
 }
 

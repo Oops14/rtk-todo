@@ -1,39 +1,28 @@
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
-import EditCalendarIcon from '@mui/icons-material/EditCalendar'
-import FaceRetouchingNaturalIcon from '@mui/icons-material/FaceRetouchingNatural'
-import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined'
-import NotificationsIcon from '@mui/icons-material/Notifications'
+type MenuItem = {
+    title: string
+    icon: JSX.Element
+}
 
-const menus = [
-    {
-        title: 'All Notes',
-        icon: <FaceRetouchingNaturalIcon />,
-    },
-    {
-        title: 'Reminders',
-        icon: <NotificationsIcon />,
-    },
-    {
-        title: 'Edit Labels',
-        icon: <EditCalendarIcon />,
-    },
-    {
-        title: 'Archives',
-        icon: <Inventory2OutlinedIcon />,
-    },
-    {
-        title: 'Trash',
-        icon: <DeleteOutlineOutlinedIcon />,
-    },
-]
+type Props = {
+    menus: MenuItem[]
+    activeTab: string
+    setActiveTab: (activeTab: string) => void
+}
 
-const Sidebar = () => {
+const Sidebar = ({ menus, activeTab, setActiveTab }: Props) => {
+    const changeTab = (tabTitle: string) => {
+        setActiveTab(tabTitle)
+    }
+
     return (
         <div className={'main-sidebar'}>
             <ul className={'sidebar-menu'}>
                 {menus.map((i, index) => {
                     return (
-                        <li key={index} className={''}>
+                        <li
+                            key={index}
+                            onClick={() => changeTab(i.title)}
+                            className={activeTab === i.title ? 'active' : ''}>
                             <a href="#">
                                 <span>{i.icon}</span>
                                 {i.title}

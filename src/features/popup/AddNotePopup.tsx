@@ -8,8 +8,9 @@ type Props = {
 }
 
 /**
- * 
- // TODO: REMOVE HARDCODED VALUE FOR IMG.
+ * AddNotePopup component allows users to create a new note.
+ * It provides a form with an input field for the note title and a select dropdown to choose the note type (task or reminder).
+ * When the form is submitted, a new note is dispatched to the Redux store and the popup is closed.
  */
 export const AddNotePopup = ({ setIsOpen }: Props) => {
     const dispatch = useAppDispatch()
@@ -23,17 +24,18 @@ export const AddNotePopup = ({ setIsOpen }: Props) => {
     const addNewNote = () => {
         if (titleInputRef.current) {
             const title = titleInputRef.current.value
-            console.log('Note Title:', title)
 
-            dispatch(
-                addNote({
-                    id: uuidv4(),
-                    title: title,
-                    img: 'https://images.unsplash.com/photo-1529655683826-aba9b3e77383?w=162&auto=format',
-                    isReminder: noteType === 'reminder' ? true : false,
-                    isTask: noteType === 'task' ? true : false,
-                })
-            )
+            if (title.length) {
+                dispatch(
+                    addNote({
+                        id: uuidv4(),
+                        title: title,
+                        img: 'https://images.unsplash.com/photo-1529655683826-aba9b3e77383?w=162&auto=format',
+                        isReminder: noteType === 'reminder' ? true : false,
+                        isTask: noteType === 'task' ? true : false,
+                    })
+                )
+            }
         }
 
         setIsOpen(false)

@@ -1,12 +1,13 @@
-import './app.scss'
-import AllNotes from '../pages/notes/AllNotes.tsx'
-import Sidebar from '../widgets/sidebar/Sidebar.tsx'
-import { useState } from 'react'
-import FaceRetouchingNaturalIcon from '@mui/icons-material/FaceRetouchingNatural'
-import NotificationsIcon from '@mui/icons-material/Notifications'
-import EditCalendarIcon from '@mui/icons-material/EditCalendar'
-import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined'
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
+import EditCalendarIcon from '@mui/icons-material/EditCalendar'
+import FaceRetouchingNaturalIcon from '@mui/icons-material/FaceRetouchingNatural'
+import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined'
+import NotificationsIcon from '@mui/icons-material/Notifications'
+import { useState } from 'react'
+import AllNotes from '../pages/notes/AllNotes.tsx'
+import Reminder from '../pages/reminder/Reminder.tsx'
+import Sidebar from '../widgets/sidebar/Sidebar.tsx'
+import './app.scss'
 
 function App() {
     const menus = [
@@ -42,7 +43,8 @@ function App() {
                         <Sidebar menus={menus} activeTab={activeTab} setActiveTab={setActiveTab} />
                     </div>
                     <div className="col-lg-10">
-                        <AllNotes />
+                        {activeTab === 'All Notes' && <AllNotes />}
+                        {activeTab === 'Reminders' && <Reminder title={'Reminders'} />}
                     </div>
                 </div>
             </div>

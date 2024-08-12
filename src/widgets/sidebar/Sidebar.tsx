@@ -1,3 +1,8 @@
+import { useSelector } from 'react-redux'
+import { AppRootStateType } from '../../app/store.ts'
+import type { Reminder } from '../../entities/reminderItem/model/reminderSlice.ts'
+import { ItemCounter } from '../../features/item-counter/ItemCounter.tsx'
+
 type MenuItem = {
     title: string
     icon: JSX.Element
@@ -10,6 +15,8 @@ type Props = {
 }
 
 const Sidebar = ({ menus, activeTab, setActiveTab }: Props) => {
+    const reminders = useSelector<AppRootStateType, Reminder[]>(state => state.reminder)
+
     const changeTab = (tabTitle: string) => {
         setActiveTab(tabTitle)
     }
@@ -23,6 +30,8 @@ const Sidebar = ({ menus, activeTab, setActiveTab }: Props) => {
                             key={index}
                             onClick={() => changeTab(i.title)}
                             className={activeTab === i.title ? 'active' : ''}>
+                            {i.title === 'Reminders' && reminders.length ?
+                                <ItemCounter reminders={reminders} /> : <></>}
                             <a href="#">
                                 <span>{i.icon}</span>
                                 {i.title}

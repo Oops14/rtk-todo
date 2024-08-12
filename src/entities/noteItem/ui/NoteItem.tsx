@@ -1,3 +1,4 @@
+import React, { memo, useCallback } from 'react'
 import { addTask, NoteTasks, Task } from '../../tasks/model/tasksSlice.ts'
 import { TaskItem } from '../../tasks/ui/Task.tsx'
 import NotificationsIcon from '@mui/icons-material/Notifications'
@@ -7,6 +8,7 @@ import { AppRootStateType, useAppDispatch } from '../../../app/store.ts'
 import { useRef, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { useSelector } from 'react-redux'
+import { addReminder, type Reminder } from '../../reminderItem/model/reminderSlice.ts'
 
 type Props = {
     itemId: string
@@ -15,19 +17,18 @@ type Props = {
     isTask: boolean
 }
 
-const NoteItem = ({ itemId, title, img, isTask }: Props) => {
+const NoteItem = memo(({ itemId, title, img, isTask }: Props) => {
     const dispatch = useAppDispatch()
-
     const tasks = useSelector<AppRootStateType, NoteTasks>((state) => state.tasks)
+    const reminders = useSelector<AppRootStateType, Reminder[]>(state => state.reminder)
 
-    console.log(tasks)
+    console.log(reminders)
 
     const [activeItemId, setActiveItemId] = useState<string | null>(null)
     const taskRef = useRef<HTMLInputElement>(null)
 
     const addTaskInput = (noteId: string, e: React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault()
-
         setActiveItemId(noteId)
     }
 
@@ -46,6 +47,13 @@ const NoteItem = ({ itemId, title, img, isTask }: Props) => {
 
         setActiveItemId(null)
     }
+
+    /**
+     * TODO: RECREATE DATE PARAM.
+     */
+    const addToReminders = useCallback(() => {
+        dispatch(addReminder({ id: itemId, title, img, date: '25.01' }))
+    }, [dispatch, itemId, title, img])
 
     return (
         <div key={itemId} className="masonry-grid-item">
@@ -93,7 +101,8 @@ const NoteItem = ({ itemId, title, img, isTask }: Props) => {
 
             <div className="bottom-buttons">
                 <button>
-                    <NotificationsIcon />
+                    <NotificationsIcon onClick={addToReminders}
+                                       className={reminders.some(r => r.id === itemId) ? 'active-reminder' : ''} />
                 </button>
                 <button>
                     <ColorLensIcon />
@@ -104,6 +113,6 @@ const NoteItem = ({ itemId, title, img, isTask }: Props) => {
             </div>
         </div>
     )
-}
+})
 
 export default NoteItem

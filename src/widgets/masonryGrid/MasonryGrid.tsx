@@ -17,7 +17,13 @@ export default function MasonryGrid() {
         <Box sx={{ width: '100%', minHeight: 829 }}>
             <Masonry columns={4} spacing={2}>
                 {notes.map((item) => (
-                    <NoteItem itemId={item.id} title={item.title} img={item.img ?? ''} isTask={item.isTask} />
+                    <NoteItem
+                        key={item.id}
+                        itemId={item.id}
+                        title={item.title}
+                        img={item.img ?? ''}
+                        isTask={item.isTask}
+                    />
                 ))}
             </Masonry>
         </Box>

@@ -52,7 +52,15 @@ const NoteItem = memo(({ itemId, title, img, isTask }: Props) => {
      * TODO: RECREATE DATE PARAM.
      */
     const addToReminders = useCallback(() => {
-        dispatch(addReminder({ id: itemId, title, img, date: '25.01' }))
+        const currentDateTime = new Date();
+        const formattedDateTime = new Intl.DateTimeFormat('en-GB', {
+            day: '2-digit',
+            month: 'long',
+            hour: '2-digit',
+            minute: '2-digit',
+        }).format(currentDateTime);
+
+        dispatch(addReminder({ id: itemId, title, img, date: formattedDateTime }))
     }, [dispatch, itemId, title, img])
 
     return (

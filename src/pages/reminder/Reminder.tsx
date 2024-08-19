@@ -18,9 +18,10 @@ const Reminder = ({ title }: Props) => {
                 <h3 className={'content-title'}>{title}</h3>
             </div>
             <div className="r-items">
+                {reminders.length === 0 && <div className={'r-empty-message'}>You haven't added any items.</div>}
                 {reminders.map(r => {
                     return (
-                        <ReminderItem key={r.id} />
+                        <ReminderItem key={r.id} date={r.date}/>
                     )
                 })}
             </div>

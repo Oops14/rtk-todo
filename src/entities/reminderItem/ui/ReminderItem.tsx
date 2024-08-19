@@ -1,4 +1,10 @@
-export const ReminderItem = () => {
+type Props = {
+    date: string
+}
+
+export const ReminderItem = ({ date }: Props) => {
+    const splitDate = date.split('at');
+
     return (
         <div className="r-item">
             <div className="r-image">
@@ -6,8 +12,8 @@ export const ReminderItem = () => {
             </div>
             <div className="r-item-info">
                 <div className="r-date">
-                    15:15
-                    <span>26 FEB</span>
+                    {splitDate[1]}
+                    <span>{splitDate[0]}</span>
                 </div>
                 <div className="r-title">Mushrooms</div>
             </div>
